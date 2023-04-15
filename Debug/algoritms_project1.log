@@ -1,7 +1,73 @@
 ﻿  directe_graph.cpp
-C:\Users\אביב וידנפלד\source\repos\algoritms_project1\directe_graph.cpp(9,2): error C2248: 'graph::my_ver': cannot access private member declared in class 'graph'
-C:\Users\אביב וידנפלד\source\repos\algoritms_project1\graph.h(12): message : see declaration of 'graph::my_ver'
-C:\Users\אביב וידנפלד\source\repos\algoritms_project1\graph.h(8): message : see declaration of 'graph'
-  graph.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(796,1): error C2528: 'pointer': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(644): message : see reference to class template instantiation 'std::allocator<vertex &>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(738): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<vertex &>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(770): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<vertex &>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(770): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<vertex &>,_Ty>' being compiled
+          with
+          [
+              _Ty=vertex &
+          ]
+C:\Users\אביב וידנפלד\source\repos\algoritms_project1\directe_graph.cpp(24): message : see reference to class template instantiation 'std::list<vertex &,std::allocator<vertex &>>' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(797,1): error C2528: 'const_pointer': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(816,1): error C2528: 'address': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(820,1): error C2528: 'address': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(833,1): error C2528: '_Ptr': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(838,1): error C2528: 'allocate': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(844,1): error C2528: 'allocate': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(646,1): error C2528: 'abstract declarator': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(647,1): error C2528: 'abstract declarator': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(666,1): error C2528: '<template-parameter>': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(680,1): error C2528: '<template-parameter>': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(779,101): error C2528: '<template-parameter>': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(1239,1): error C2535: 'void std::list<vertex &,std::allocator<vertex &>>::push_front(_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=vertex &
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(968): message : see declaration of 'std::list<vertex &,std::allocator<vertex &>>::push_front'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(1251,1): error C2535: 'void std::list<vertex &,std::allocator<vertex &>>::push_back(_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=vertex &
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(972): message : see declaration of 'std::list<vertex &,std::allocator<vertex &>>::push_back'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(1320,1): error C2535: 'std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>> std::list<_Ty,std::allocator<_Ty>>::insert(std::_List_const_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=vertex &
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(976): message : see declaration of 'std::list<vertex &,std::allocator<vertex &>>::insert'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(780,1): error C2528: 'abstract declarator': pointer to reference is illegal
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(339): message : see reference to class template instantiation 'std::_Simple_types<_Ty>' being compiled
+          with
+          [
+              _Ty=vertex &
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(348): message : see reference to class template instantiation 'std::_List_simple_types<_Ty>' being compiled
+          with
+          [
+              _Ty=vertex &
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(1383): message : see reference to class template instantiation 'std::_List_val<std::_List_simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=vertex &
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\list(1794): message : see reference to class template instantiation 'std::_Compressed_pair<std::allocator<std::_List_node<_Ty,std::_Default_allocator_traits<_Alloc>::void_pointer>>,std::_List_val<std::_List_simple_types<_Ty>>,true>' being compiled
+          with
+          [
+              _Ty=vertex &,
+              _Alloc=std::allocator<vertex &>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(781,1): error C2528: 'abstract declarator': pointer to reference is illegal
   main.cpp
   Generating Code...

@@ -43,7 +43,6 @@ void un_directedGraph::add_arc(int num_ver1, int num_ver2)
 	my_ver[num_ver2].add_neighbor(num_ver1);
 	degree[num_ver2 - 1]++;
 	same_arc(num_ver1, num_ver2);
-	
 }
 
 list<int> un_directedGraph::find_circuit(int num_of_ver)
@@ -63,6 +62,5 @@ list<int> un_directedGraph::find_circuit(int num_of_ver)
 list<int> un_directedGraph::find_euler_circuit()
 {
 	list<int> L = find_circuit(my_ver[0].get_my_num());
-
 }
 
