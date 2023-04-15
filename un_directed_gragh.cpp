@@ -2,17 +2,13 @@
 
 
 
-graph* un_directedGraph::init_undeircted_graph(int n, int m)
+void un_directedGraph::init_undeircted_graph()
 {
 	int vertex1, vertex2;
-	un_directedGraph graph = un_directedGraph(n, m);
-	for (int i = 0; i < 10; i++)
+	for(int i = 0; i < amount_of_arcs; i++)
 	{
 		cin >> vertex1 >> vertex2;
 		add_arc(vertex1, vertex2);
-		degree[vertex1 - 1]++;
-		degree[vertex2 - 1]++;
-
 	}
 }
 
@@ -23,40 +19,41 @@ un_directedGraph::un_directedGraph(int amount_of_ver, int amount_of_arcs) : grap
 		degree.push_back(0);
 	
 }
+
 void un_directedGraph::same_arc(int num_ver1, int num_ver2)
 {
-	list<arc>::iterator neighbor1 = my_ver[num_ver1].get_neighbor(num_ver2);
-	list<arc>::iterator neighbor2 = my_ver[num_ver2].get_neighbor(num_ver1);
+	list<arc>::iterator neighbor1 = --(my_ver[num_ver1 - 1].get_list().end());
+	list<arc>::iterator neighbor2 = --(my_ver[num_ver2 - 1].get_list().end());
 	neighbor1->same_arc = &(*neighbor2);
 	neighbor2->same_arc = &(*neighbor1);
 }
-void un_directedGraph::mark(int num_ver1, int num_ver2)
-{
-	list<arc>::iterator neighbor1 = my_ver[num_ver1].get_neighbor(num_ver2);
-	list<arc>::iterator neighbor2 = my_ver[num_ver2].get_neighbor(num_ver1);
-	neighbor1->is_visited = true;
-	neighbor2->is_visited = true;
 
+void un_directedGraph::mark(list<arc>::iterator curr_arc)
+{
+	curr_arc->is_visited = true;
+	curr_arc->same_arc->is_visited = true;
 }
-vector<vertex>::iterator un_directedGraph::next_avilable(int num_ver)
+
+list<arc>::iterator un_directedGraph::next_avilable(int num_ver)
 {
 	vector<vertex>::iterator it = next(my_ver.begin(), num_ver - 1);
-	list<arc>::iterator ptr;
-	for (int i = 0; i < it->get_neighbors_num(); i++)
+	list<arc>::iterator ptr = it->get_ptr();
+	while(ptr != it->get_list().end())
 	{
-		ptr = it->get_neighbor(i);
 		if (!(ptr->is_visited))
 		{
-			return next(my_ver.begin(), ptr->des - 1);
+			return ptr;
 		}
+		ptr++;
 	}
-	return it;
+	return ptr;
 }
+
 void un_directedGraph::add_arc(int num_ver1, int num_ver2)
 {
-	my_ver[num_ver1].add_neighbor(num_ver2);
+	my_ver[num_ver1 - 1].add_neighbor(num_ver2);
 	degree[num_ver1 - 1]++;
-	my_ver[num_ver2].add_neighbor(num_ver1);
+	my_ver[num_ver2 - 1].add_neighbor(num_ver1);
 	degree[num_ver2 - 1]++;
 	same_arc(num_ver1, num_ver2);
 }
@@ -66,12 +63,13 @@ list<vertex*> un_directedGraph::find_circuit(int num_of_ver)
 	list<vertex*> ver_list;
 	vector<vertex>::iterator it = next(my_ver.begin(), num_of_ver - 1);
 	ver_list.push_back(&(*it));
-	vector<vertex>::iterator ptr;
-	while (ptr != next_avilable(ptr->get_num()))
+	list<arc>::iterator ptr = it->get_ptr();
+	while (ptr != it->get_list().end())
 	{
-		mark(ptr->get_num(), next_avilable(ptr->get_num())->get_num());
-		ptr = next_avilable(num_of_ver);
-		ver_list.push_back(&(*ptr));
+		mark(ptr);
+		it = next(my_ver.begin(), ptr->des - 1);
+		ver_list.push_back(&(*it));
+		ptr = it->get_ptr();
 	}
 	return ver_list;
 }
@@ -85,10 +83,15 @@ list<vertex*> un_directedGraph::find_euler_circuit()
 
 	while (list_it != ver_list.end())
 	{
-		list<vertex*> temp_list = find_circuit(vec_it->get_num());
+		list<vertex*> temp_list = find_circuit((*list_it)->get_num());
 		if ((!temp_list.empty()))
-			ver_list.insert(list_it, ++(temp_list.begin()), temp_list.end());
-		list_it++;
+		{
+			list<vertex*>::iterator temp = ++list_it;
+			list_it--;
+			temp_list.pop_front();
+			ver_list.insert(temp, temp_list.begin(), temp_list.end());
+			list_it++;
+		}
 	}
 	return ver_list;
 }
@@ -100,34 +103,30 @@ bool un_directedGraph::is_eulerian()
 	return true;
 }
 
-void un_directedGraph::dfs(int node, vector<bool>& visited)
+void un_directedGraph::visit(vector<vertex>::iterator curr_ver)
 {
-	visited[node] = true;
-	list<arc>::iterator neighbor;
-	for (int i = 0; i < my_ver[node].get_neighbors_num(); i++)
+	curr_ver->set_color(GRAY);
+	for (auto& curr_ver : curr_ver->get_list())
 	{
-		neighbor = (my_ver[node]).get_neighbor(i);
-		if (!visited[neighbor->des])
+		if (my_ver[curr_ver.des - 1].get_color() == WHITE)
 		{
-			dfs(neighbor->des, visited);
+			visit(my_ver.begin() + (curr_ver.des - 1));
 		}
 	}
-}
+	curr_ver->set_color(BLACK);
 
+}
 
 bool un_directedGraph::is_connected()
 {
-	int n = my_ver.size();
-	vector<bool> visited(n, false);
-	dfs(0, visited);
-	for (bool v : visited) {
-		if (!v) {
+	visit(my_ver.begin());
+	for (auto& ver : my_ver)
+	{
+		if (ver.get_color() != BLACK)
 			return false;
-		}
 	}
 	return true;
 }
-
 
 bool un_directedGraph::is_even()
 {

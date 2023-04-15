@@ -58,7 +58,7 @@ list<vertex*> directedGraph::find_euler()
 
 bool directedGraph::is_strongly_connected()
 {
-	
+	return true;
 }
 
 bool directedGraph::is_euler_graph()
