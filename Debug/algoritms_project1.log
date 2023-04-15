@@ -1,0 +1,7 @@
+﻿  directe_graph.cpp
+C:\Users\אביב וידנפלד\source\repos\algoritms_project1\directe_graph.cpp(9,2): error C2248: 'graph::my_ver': cannot access private member declared in class 'graph'
+C:\Users\אביב וידנפלד\source\repos\algoritms_project1\graph.h(12): message : see declaration of 'graph::my_ver'
+C:\Users\אביב וידנפלד\source\repos\algoritms_project1\graph.h(8): message : see declaration of 'graph'
+  graph.cpp
+  main.cpp
+  Generating Code...
