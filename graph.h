@@ -7,6 +7,7 @@
 
 class graph
 {
+protected:
 	int amount_of_ver;
 	int amount_of_arcs;
 	vector<vertex> my_ver;
