@@ -1,15 +1,6 @@
 #include "un_directed_gragh.h"
 
-bool un_directedGraph::in_euler()
-{
-	int size = degree.size();
-	for (int i = 0; i < size; i++)
-	{
-		if ((degree[i] % 2) != 0)
-			return false;
-	}
-	return true;
-}
+
 
 graph* un_directedGraph::init_undeircted_graph(int n, int m)
 {
@@ -102,27 +93,33 @@ list<vertex*> un_directedGraph::find_euler_circuit()
 	return ver_list;
 }
 
+bool un_directedGraph::is_eulerian()
+{
+	if (!is_even() || !is_connected())
+		return false;
+	return true;
+}
 
-void un_directedGraph::dfs(vector<vertex>& my_ver, vector<bool>& visited, int node)
+void un_directedGraph::dfs(int node, vector<bool>& visited)
 {
 	visited[node] = true;
-	vector<vertex>::iterator neighbor;
+	list<arc>::iterator neighbor;
 	for (int i = 0; i < my_ver[node].get_neighbors_num(); i++)
 	{
 		neighbor = (my_ver[node]).get_neighbor(i);
-		if (!visited[neighbor->get_num()])
+		if (!visited[neighbor->des])
 		{
-			dfs(my_ver, visited, neighbor->get_num());
+			dfs(neighbor->des, visited);
 		}
 	}
 }
 
-// Check if the graph represented by adjList is connected
-bool un_directedGraph::isConnected(vector<vertex>& my_ver)
+
+bool un_directedGraph::is_connected()
 {
 	int n = my_ver.size();
 	vector<bool> visited(n, false);
-	dfs(my_ver, visited, 0);
+	dfs(0, visited);
 	for (bool v : visited) {
 		if (!v) {
 			return false;
@@ -131,5 +128,16 @@ bool un_directedGraph::isConnected(vector<vertex>& my_ver)
 	return true;
 }
 
+
+bool un_directedGraph::is_even()
+{
+	int size = degree.size();
+	for (int i = 0; i < size; i++)
+	{
+		if ((degree[i] % 2) != 0)
+			return false;
+	}
+	return true;
+}
 
 
