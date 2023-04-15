@@ -8,7 +8,9 @@ enum color{WHITE, GRAY, BLACK};
 struct arc {
 	int des;
 	bool is_visited;
-	arc* same_arc;
+	//
+	list<arc>::iterator same_arc;
+	//
 }typedef arc;
 
 class vertex
@@ -27,6 +29,15 @@ public:
 		my_neighbors.push_back(my_arc);
 		ptr = my_neighbors.begin();
 	}
+	//
+	int get_my_num() { return my_num; }
+	int get_neighbors_num() { return my_neighbors.size(); }
+	list<arc>::iterator get_neighbor(int neighbor)
+	{
+		list<arc>::iterator my_neighbor = next(my_neighbors.begin(), neighbor - 1);
+		return my_neighbor;
+	}
+	//
 	list<arc>::iterator get_list_it() { return ptr; }
 	bool is_last(list<arc>::iterator it)const { return it == my_neighbors.end(); }
 };
