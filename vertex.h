@@ -23,6 +23,12 @@ public:
 	void set_color(color n_color) { my_color = n_color; }
 	color get_color() { return my_color; }
 	list<arc>& get_list() { return my_neighbors; }
+	int get_neighbors_num() { return my_neighbors.size(); }
+	list<arc>::iterator get_neighbor(int neighbor)
+	{
+		list<arc>::iterator my_neighbor = next(my_neighbors.begin(), neighbor - 1);
+		return my_neighbor;
+	}
 	void add_neighbor(int neighbot_n) { 
 		arc my_arc;
 		my_arc.des = neighbot_n;

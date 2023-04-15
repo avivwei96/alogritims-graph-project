@@ -11,8 +11,8 @@ void un_directedGraph::same_arc(int num_ver1, int num_ver2)
 {
 	list<arc>::iterator neighbor1 = my_ver[num_ver1].get_neighbor(num_ver2);
 	list<arc>::iterator neighbor2 = my_ver[num_ver2].get_neighbor(num_ver1);
-	neighbor1->same_arc = neighbor2;
-	neighbor2->same_arc = neighbor1;
+	neighbor1->same_arc = &(*neighbor2);
+	neighbor2->same_arc = &(*neighbor1);
 }
 void un_directedGraph::mark(int num_ver1, int num_ver2)
 {
@@ -45,22 +45,35 @@ void un_directedGraph::add_arc(int num_ver1, int num_ver2)
 	same_arc(num_ver1, num_ver2);
 }
 
-list<int> un_directedGraph::find_circuit(int num_of_ver)
+list<vertex*> un_directedGraph::find_circuit(int num_of_ver)
 {
-	list<vertex&> ver_list;
+	list<vertex*> ver_list;
 	vector<vertex>::iterator it = next(my_ver.begin(), num_of_ver - 1);
-	ver_list.push_back(*it);
+	ver_list.push_back(&(*it));
 	vector<vertex>::iterator ptr;
-	while (ptr != next_avilable(ptr->get_my_num()))
+	while (ptr != next_avilable(ptr->get_num()))
 	{
-		mark(ptr->get_my_num(), next_avilable(ptr->get_my_num())->get_my_num());
+		mark(ptr->get_num(), next_avilable(ptr->get_num())->get_num());
 		ptr = next_avilable(num_of_ver);
-		ver_list.push_back(*ptr);
+		ver_list.push_back(&(*ptr));
 	}
+	return ver_list;
 }
 
-list<int> un_directedGraph::find_euler_circuit()
+list<vertex*> un_directedGraph::find_euler_circuit()
 {
-	list<int> L = find_circuit(my_ver[0].get_my_num());
+	list<vertex*> ver_list;
+	vector<vertex>::iterator vec_it = my_ver.begin();
+	ver_list.push_back(&(*vec_it));
+	list<vertex*>::iterator list_it = ver_list.begin();
+
+	while (list_it != ver_list.end())
+	{
+		list<vertex*> temp_list = find_circuit(vec_it->get_num());
+		if ((!temp_list.empty()))
+			ver_list.insert(list_it, ++(temp_list.begin()), temp_list.end());
+		list_it++;
+	}
+	return ver_list;
 }
 

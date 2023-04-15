@@ -17,13 +17,13 @@ void directedGraph::add_arc(int num_ver_out, int num_ver_in)
 	in_degree[num_ver_in - 1]++;
 	out_degree[num_ver_out - 1]++;
 }
-list<vertex&> directedGraph::find_circuit(int num_of_ver)
+list<vertex*> directedGraph::find_circuit(int num_of_ver)
 {
 	// this function works only on euler graph
 	// this function find a circuit that starts at num of ver
-	list<vertex&> ver_list;
+	list<vertex*> ver_list;
 	vector<vertex>::iterator it = next(my_ver.begin(), num_of_ver - 1);
-	ver_list.push_back(*it);
+	ver_list.push_back(&(*it));
 	list<arc>::iterator ptr;
 	bool is_all_edges_used = false;
 	while (!is_all_edges_used)
@@ -34,22 +34,22 @@ list<vertex&> directedGraph::find_circuit(int num_of_ver)
 		it = next(my_ver.begin(), ptr->des - 1);
 		if (it->is_last(ptr))
 			is_all_edges_used = true;
-		ver_list.push_back(*it);
+		ver_list.push_back(&(*it));
 	}
 	return ver_list;
 }
 
-list<vertex&> directedGraph::find_euler()
+list<vertex*> directedGraph::find_euler()
 {
-	list<vertex&> ver_list;
+	list<vertex*> ver_list;
 	vector<vertex>::iterator vec_it = my_ver.begin();
-	ver_list.push_back(*vec_it);
-	list<vertex&>::iterator list_it = ver_list.begin();
+	ver_list.push_back(&(*vec_it));
+	list<vertex*>::iterator list_it = ver_list.begin();
 
 	while (list_it != ver_list.end())
 	{
-		list<vertex&> temp_list = find_circuit(vec_it->get_num());
-		if((!temp_list.empty()))
+		list<vertex*> temp_list = find_circuit(vec_it->get_num());
+		if ((!temp_list.empty()))
 			ver_list.insert(list_it, ++(temp_list.begin()), temp_list.end());
 		list_it++;
 	}
@@ -69,16 +69,16 @@ bool directedGraph::is_euler_graph()
 			return false;
 	}
 }
-void directedGraph::visit(vertex& ver)
+void directedGraph::visit(vertex* ver)
 {
-	ver.set_color(GRAY);
-	for (auto& curr_ver : ver.get_list())
+	ver->set_color(GRAY);
+	for (auto& curr_ver : ver->get_list())
 	{
-		if (my_ver[curr_ver.des].get_color() == WHITE)
+		if (my_ver[curr_ver.des - 1].get_color() == WHITE)
 		{
-			visit(my_ver[curr_ver.des]);
+			visit(&(my_ver[curr_ver.des - 1]));
 		}
 	}
-	ver.set_color(BLACK);
+	ver->set_color(BLACK);
 
 }

@@ -14,7 +14,7 @@ protected:
 public:
 	graph(int amount_of_ver, int amount_of_arcs);
 	virtual void add_arc(int num_ver_out, int num_of_ver_in) = 0;
-	virtual list<vertex&> find_circuit(int num_of_ver) = 0;
+	virtual list<vertex*> find_circuit(int num_of_ver) = 0;
 };
 
 #endif // !GRAPH

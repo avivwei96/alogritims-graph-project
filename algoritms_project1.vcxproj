@@ -142,10 +142,12 @@
     <ClCompile Include="directe_graph.cpp" />
     <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="un_directed_gragh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="directed_graph.h" />
     <ClInclude Include="graph.h" />
+    <ClInclude Include="un_directed_gragh.h" />
     <ClInclude Include="vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
