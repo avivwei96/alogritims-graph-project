@@ -8,22 +8,24 @@ int main()
 	int num_of_ver, num_of_arcs;
 	cout << "Is the graph directed: y/n ";
 	cin >> type >> num_of_ver >> num_of_arcs;
-
-	if (type == 'n')
+	graph* new_graph;
+	if (num_of_arcs < 1 || num_of_arcs < 1)
+		cout << "invalid input";
+	else if (type == 'n' || type == 'y')
 	{
-		un_directedGraph new_graph(num_of_ver, num_of_arcs);
-		list<vertex*> euler_circuit;
-		new_graph.init_undeircted_graph();
-		if (new_graph.is_eulerian())
+		if (type == 'n')
 		{
-			euler_circuit = new_graph.find_euler_circuit();
-			cout << "The graph is aulerian:\n(";
-			for (auto& ver : euler_circuit)
-				cout << ver->get_num() << ",";
-			cout << ")\n";
+			new_graph = new un_directedGraph(num_of_ver, num_of_arcs);
 		}
 		else
-			cout << "The graph is n0t aulerian:\n";
+		{
+			new_graph = new directedGraph(num_of_ver, num_of_arcs);
+		}
+		new_graph->init();
+		new_graph->print_euler_circuit();
 	}
+	else
+		cout << "invalid input";
+
 	return 0;
 }
